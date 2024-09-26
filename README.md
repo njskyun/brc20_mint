@@ -1,3 +1,6 @@
+前提条件，需要有fb全节点，不需要安装ord索引器，打的时候自己盯着进度
+这套同样也适合btc（需要修改下main.go文件中的几处请求fb rpc的地方）
+
 1.安装 Go1.23.1
 wget https://golang.org/dl/go1.23.1.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.23.1.linux-amd64.tar.gz
