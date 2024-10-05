@@ -180,7 +180,7 @@ func sendRawTransaction(txHex string) (string, error) {
 	url := "http://btc:btc@127.0.0.1:8332/"
 	reqBody, err := json.Marshal(map[string]interface{}{
 		"jsonrpc": "1.0",
-		"id":      "curltest",
+		"id":      txHex,
 		"method":  "sendrawtransaction",
 		"params":  []interface{}{txHex},
 	})
@@ -221,8 +221,8 @@ func sendRawTransaction(txHex string) (string, error) {
 }
 
 func mint(mintNum int, myaddr string, minterPrikey string, ordinals string, gas_fee int64) {
-	if mintNum > 5000 {
-		log.Printf("最大5000张")
+	if mintNum > 2300 {
+		log.Printf("最大2300张")
 		return
 	}
 
@@ -236,7 +236,7 @@ func mint(mintNum int, myaddr string, minterPrikey string, ordinals string, gas_
 	
 	utxo, err := getUtxoByAddress(mintaddr)
 	log.Printf("utxo是Txid: %s", utxo.TxID)
-	if err != nil {
+	if err != nil { 
 		log.Fatalf("Error inscribing: %v", err)  
 	}
 
@@ -294,7 +294,9 @@ func mint(mintNum int, myaddr string, minterPrikey string, ordinals string, gas_
 
  		// 等待支付订单先确认
 		for {
-			time.Sleep(30 * time.Second) // 可以根据需要调整时间间隔	
+			log.Printf("等待转账确认, transaction ID: %s", commitTxID)
+			
+			time.Sleep(10 * time.Second) // 可以根据需要调整时间间隔	
 			confirmNum, _ := CheckTransactionConfirmation(commitTxID)
  			if confirmNum {
 				break // 交易已确认，退出循环
@@ -313,22 +315,29 @@ func mint(mintNum int, myaddr string, minterPrikey string, ordinals string, gas_
 		}
 
 		log.Printf("MINT订单成功上链")
+
+		return 
 	}
 }
 
 
 func main() {
 	//mint张数 	
-	mintNum := 10
+	mintNum := 2300
 	//接收铭文的地址
 	myaddr := ""
 	//mint铭文付钱的地址的私钥
 	minterPrikey := ""
 	//打的铭文字符串
-	ordinals := `{"p":"brc-20","op":"mint","tick":"MoonCats","amt":"1000"}`
+	// ordinals := `{"p":"brc-20","op":"mint","tick":"MoonCats","amt":"1000"}`
+	ordinals := `{"p":"brc-20","op":"mint","tick":"MoonRats","amt":"1000000"}`
 
-	//gas_fee费用，如果填写0，则自动获取链上gas
-	var gas_fee int64 = 0
-
-	mint(mintNum, myaddr, minterPrikey, ordinals, gas_fee)
+	
+	//gas_fee费用
+	var gas_fee int64 = 190
+	for {
+		mint(mintNum, myaddr, minterPrikey, ordinals, gas_fee)
+		log.Printf("等待10秒")
+		time.Sleep(10 * time.Second) 
+	}
 }
