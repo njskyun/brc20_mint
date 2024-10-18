@@ -22,3 +22,46 @@ docker-compose --profile mainnet logs --tail=10 -f bitcoind
 docker-compose --profile mainnet logs --tail=10 -f addrindexrs
 docker-compose --profile mainnet logs --tail=10 -f counterparty-core
  
+
+
+
+==============================   铸造教程   =============================================
+
+
+查看余额
+curl -X POST http://127.0.0.1:4000/api/ \
+--user rpc:rpc \
+-H 'Content-Type: application/json; charset=UTF-8' \
+-H 'Accept: application/json, text/javascript' \
+--data-binary '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "get_balances",
+    "params": {
+        "filters": [
+            {
+                "field": "address",
+                "op": "==",
+                "value": "地址"
+            }
+        ]
+    }
+}'
+
+铸造：
+curl -X POST http://127.0.0.1:4000/api/ \
+--user rpc:rpc \
+-H 'Content-Type: application/json; charset=UTF-8' \
+-H 'Accept: application/json, text/javascript' \
+--data-binary '{
+"jsonrpc": "2.0",
+"id": 1,
+"method": "create_fairmint",
+"params": {
+"source": "替换您的钱包地址",
+"asset": "MINTS",
+"quantity": 1000,
+"allow_unconfirmed_inputs": true,
+"exact_fee": 2000
+}
+}'
