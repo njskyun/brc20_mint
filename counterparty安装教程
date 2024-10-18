@@ -29,39 +29,8 @@ docker-compose --profile mainnet logs --tail=10 -f counterparty-core
 
 
 查看余额
-curl -X POST http://127.0.0.1:4000/api/ \
---user rpc:rpc \
--H 'Content-Type: application/json; charset=UTF-8' \
--H 'Accept: application/json, text/javascript' \
---data-binary '{
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "get_balances",
-    "params": {
-        "filters": [
-            {
-                "field": "address",
-                "op": "==",
-                "value": "地址"
-            }
-        ]
-    }
-}'
+ 
 
 铸造：
-curl -X POST http://127.0.0.1:4000/api/ \
---user rpc:rpc \
--H 'Content-Type: application/json; charset=UTF-8' \
--H 'Accept: application/json, text/javascript' \
---data-binary '{
-"jsonrpc": "2.0",
-"id": 1,
-"method": "create_fairmint",
-"params": {
-"source": "替换您的钱包地址",
-"asset": "MINTS",
-"quantity": 1000,
-"allow_unconfirmed_inputs": true,
-"exact_fee": 2000
-}
-}'
+curl http://127.0.0.1:4000/v2/addresses/地址/compose/fairmint?asset=MINTS&quantity=1000&allow_unconfirmed_inputs=true&exact_fee=5000（这是矿工费）
+curl http://127.0.0.1:4000/v2/addresses/bc1p8hsq23t2vfa9fl9cf3n2plds4kh785w6zfg77fjuxp4j9sznprnqc0mrwq/compose/fairmint?asset=MINTS&quantity=1000&allow_unconfirmed_inputs=true&exact_fee=5000
