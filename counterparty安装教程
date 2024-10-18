@@ -9,3 +9,8 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose --profile mainnet up -d
+
+docker-compose --profile mainnet logs --tail=10 -f bitcoind 
+docker-compose --profile mainnet logs --tail=10 -f addrindexrs
+docker-compose --profile mainnet logs --tail=10 -f counterparty-core
+ 
