@@ -14,7 +14,7 @@ source ~/.bashrc
 go version
 
 2. clone代码库
-3. 
+   
 git clone https://github.com/njskyun/brc20_mint.git
 
 3.安装依赖
