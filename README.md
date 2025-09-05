@@ -1,6 +1,6 @@
 前提条件，需要有btc全节点，不需要安装ord索引器，打的时候自己盯着进度 
 
-1.安装 Go1.23.1
+```1.安装 Go1.23.1```
 
 wget https://golang.org/dl/go1.23.1.linux-amd64.tar.gz
 
