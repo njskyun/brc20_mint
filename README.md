@@ -18,6 +18,7 @@ go version
 git clone https://github.com/njskyun/brc20_mint.git
 
 3.安装依赖
+
 cd brc20_mint 
 
 go mod tidy
