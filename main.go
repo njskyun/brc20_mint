@@ -49,7 +49,7 @@ type UTXO struct {
 
 
 func CheckTransactionConfirmation(txID string) (bool, error) {
-	url := fmt.Sprintf("https://mempool.fractalbitcoin.io/api/tx/%s", txID)
+	url := fmt.Sprintf("https://mempool.space/api/tx/%s", txID)
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -76,7 +76,7 @@ func CheckTransactionConfirmation(txID string) (bool, error) {
 
 
 func getUtxoByAddress(address string) (UTXO, error) {
-	url := fmt.Sprintf("https://mempool.fractalbitcoin.io/api/address/%s/utxo", address)
+	url := fmt.Sprintf("https://mempool.space/api/address/%s/utxo", address)
 	resp, err := http.Get(url)
 	if err != nil {
 		return UTXO{}, err
@@ -119,7 +119,7 @@ func fetchAvgFee() (int64, error) {
 	currentTime := time.Now()
 
 	if currentTime.Sub(lastRequestTime) >= 60*time.Second {
-		url := "https://mempool.fractalbitcoin.io/api/v1/mining/blocks/fee-rates/100m"
+		url := "https://mempool.space/api/v1/mining/blocks/fee-rates/100m"
 		resp, err := http.Get(url)
 		if err != nil {
 			return 0, err
