@@ -323,7 +323,7 @@ func mint(mintNum int, myaddr string, minterPrikey string, ordinals string, gas_
 
 func main() {
 	//mint张数 	
-	mintNum := 2300
+	mintNum := 2000
 	//接收铭文的地址
 	myaddr := ""
 	//mint铭文付钱的地址的私钥
@@ -334,7 +334,7 @@ func main() {
 
 	
 	//gas_fee费用
-	var gas_fee int64 = 190
+	var gas_fee int64 = 1
 	for {
 		mint(mintNum, myaddr, minterPrikey, ordinals, gas_fee)
 		log.Printf("等待10秒")
